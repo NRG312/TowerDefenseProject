@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6f7fc55e03e714aa4425dcc7e9244e, type: 3}
   m_Name: LaserTowerLvl_2
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 0}
   towerUpgraded: {fileID: 11400000, guid: d6c88e57d2eeec24cabf3aafadcdb28e, type: 2}
-  speedShot: 0
-  damage: 0
-  price: 0
+  timeToShoot: 3.5
+  damage: 0.75
+  price: 350
   index: 1

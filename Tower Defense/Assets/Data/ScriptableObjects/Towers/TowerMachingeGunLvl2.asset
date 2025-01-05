@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6f7fc55e03e714aa4425dcc7e9244e, type: 3}
   m_Name: TowerMachingeGunLvl2
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 0}
   towerUpgraded: {fileID: 11400000, guid: fa57d1e6bad09dd4a8a0f1e2e8bb6ce0, type: 2}
-  speedShot: 0
-  damage: 0
-  price: 0
+  timeToShoot: 1.25
+  damage: 0.6
+  price: 200
   index: 4

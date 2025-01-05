@@ -1,29 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject healthBar;
-    [SerializeField] private float health = 1f;
+    [SerializeField] private GameObject objHealth;
+    private EnemyController _enemyController;
+    private Slider _sliderHealth;
+
+    public void ResetHealth()
+    {
+        _enemyController = GetComponentInParent<EnemyController>();
+        _sliderHealth = GetComponentInChildren<Slider>();
+        _sliderHealth.maxValue = _enemyController.hpEnemy;
+        _sliderHealth.value = _enemyController.hpEnemy;
+        objHealth.SetActive(false);
+    }
+
     public void TakeDamage(float damage)
     {
-        if (health > 0)
+        if (_sliderHealth.value > 0)
         {
-            health -= damage;
-            healthBar.transform.localScale = new Vector3(1,health,1);
+            _sliderHealth.value -= damage;
         }
-        if (health <= 0)
+        if (_sliderHealth.value <= 0)
         {
-            healthBar.transform.localScale = new Vector3(1, 0, 1);
             DeadBot();
         }
     }
 
     private void DeadBot()
     {
-        EnemyController enemy = GetComponentInParent<EnemyController>();
-        enemy.GetComponent<IScoreBehaviour>().Score(enemy.gainMoney);
-        enemy.EnemyDead();
+        _enemyController.GetComponent<IScoreBehaviour>().Score(_enemyController.gainMoney);
+        _enemyController.EnemyDead();
+    }
+
+    public void FunHealthBar()
+    {
+        if (_sliderHealth.value < _sliderHealth.maxValue)
+        {
+            objHealth.SetActive(true);
+            transform.DOLookAt(Camera.main.transform.position, 1f);
+        }
     }
 }

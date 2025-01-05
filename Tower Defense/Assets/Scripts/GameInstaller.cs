@@ -1,23 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-    public GameObject managersPrefab;
     public TowerController[] listTowers;
     public GameObject[] listEnemy;
+    
     public override void InstallBindings()
     {
-        CreateManagerObject();
+        CreateInstallsObject();
     }
-
-    private void CreateManagerObject()
+    
+    private void CreateInstallsObject()
     {
-        //Create managers
         InstallManagers();
         InstallGameplay();
+        InstallSignals();
+    }
+
+    private void InstallSignals()
+    {
+        SignalBusInstaller.Install(Container);
+        Container.DeclareSignal<OnWinGame>();
+        Container.DeclareSignal<OnLoseGame>();
     }
     private void InstallGameplay()
     {
@@ -26,16 +34,29 @@ public class GameInstaller : MonoInstaller
             Container.BindFactory<TowerController, TowerController.Factory>().FromComponentInNewPrefab(t);
         }
 
-        /*foreach (var t in listEnemy)
+        foreach (var t in listEnemy)
         {
-            //Container.BindFactory<>()
-        }*/
+            Container.BindFactory<EnemyController, EnemyController.Factory>().FromComponentInNewPrefab(t);
+        }
     }
 
     private void InstallManagers()
     {
         Container.Bind<GameplayController>().FromComponentInHierarchy().AsSingle();
         //
-        Container.Bind<ScoreController>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<WaveController>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<ObjectsTickController>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<WaypointsController>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<UIController>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<MoneyController>().FromComponentInHierarchy().AsSingle();
+        //
+        Container.Bind<ObjectPool>().FromComponentInHierarchy().AsSingle();
+        
     }
 }

@@ -9761,6 +9761,7 @@ MonoBehaviour:
   towerData: {fileID: 11400000, guid: ac2d3bbbbf81925489663155fbb9aaa5, type: 2}
   target: {fileID: 0}
   tower: {fileID: 0}
+  canShoot: 0
 --- !u!114 &6053997407238696930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9787,7 +9788,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

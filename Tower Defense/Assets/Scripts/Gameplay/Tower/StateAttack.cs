@@ -29,10 +29,6 @@ public class StateAttack : State
     
     private void RunTower()
     {
-        //Skonczylem na zrobieniu przeciwnika i wiezyczek wszystko dziala dobrze zabijaja i przestaja strzelac jak go zabija(musze zobaczyc czy moze nie daloby sie tego zrobic poprzez event zeby moze nie byl wykrywalny czy cos)
-        //jest blad ze jak postawie wiezyczke to spherecollider blokuje klikniecie w inne plytki musze wylaczyc blokade na nich
-        //mam pomysl jak odpale collision w wiezy laser (desktop/Laser) to sie pociski odbijaja to mozna dodac do niektorych wiez jesli maja za maly level to np beda odbijac pociski
-        //RocketLauncher nie ma partcilesystem bedzie trzeba zobaczyc i przemyslec go(moze uda mi sie dodać do shoot function ze przy wykryciu ze nie ma partcile system to stworzy pocisk ktory tutaj doda sie recznie)
         if (_towerController.target != null)
         {
             _tower.transform.DOLookAt(_towerController.target.transform.position,1);
@@ -43,21 +39,17 @@ public class StateAttack : State
                 
                 if (angle < 8f && _towerController.canShoot)
                 {
-                    Shoot();
+                    _towerController.Shoot();
                 }
             }
         }
         //if target is destroyed change to null
-        if (!_towerController.target.gameObject.activeInHierarchy && _towerController.target != null)
+        if (_towerController.target != null)
         {
-            _towerController.target = null;
+            if (!_towerController.target.gameObject.activeInHierarchy)
+            {
+                _towerController.target = null;
+            }
         }
-    }
-
-    private void Shoot()
-    {
-        ParticleSystem particle = _tower.GetComponentInChildren<ParticleSystem>();
-        particle.Play();
-        _towerController.canShoot = false;
     }
 }

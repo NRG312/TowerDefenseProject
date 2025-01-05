@@ -15,6 +15,9 @@ public class InteractBase : MonoBehaviour
     [SerializeField] private GameObject buyPanel;
     [SerializeField] private GameObject upgradePanel;
 
+    [Space(20f)] 
+    [SerializeField] private LayerMask ignoreRaycast;
+
     private void Start()
     {
         _cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -24,6 +27,7 @@ public class InteractBase : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Physics.IgnoreLayerCollision(5,6);
             _ray = _cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(_ray,out _hit))
             {
@@ -41,7 +45,7 @@ public class InteractBase : MonoBehaviour
                     else
                     {
                         upgradePanel.SetActive(true);
-                        //Send tower component to upgrade
+                        upgradePanel.GetComponent<UpgradeTower>().NewTarget(_target);
                         //
                         buyPanel.SetActive(false);
                     }

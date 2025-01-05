@@ -26,9 +26,11 @@ public class TowerController : MonoBehaviour
                 tower = transform.GetChild(i).gameObject;
             }
         }
+        //turn off blocking collider on mouse clicking
+        Physics.queriesHitTriggers = false;
     }
 
-    private void Update()
+    public void Tick()
     {
         if (canShoot == false)
         {
@@ -40,6 +42,7 @@ public class TowerController : MonoBehaviour
             }
         }
     }
+
     //Detecting Enemy
     private void OnTriggerEnter(Collider other)
     {
@@ -48,6 +51,15 @@ public class TowerController : MonoBehaviour
             target = other.gameObject;
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Enemy" && target == null)
+        {
+            target = other.gameObject;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (target != null)
@@ -55,7 +67,21 @@ public class TowerController : MonoBehaviour
             target = null;
         }
     }
-    
+
+    public void Shoot()
+    {
+        if (GetComponentInChildren<ParticleCollision>() != null)
+        {
+            ParticleSystem particle = GetComponentInChildren<ParticleSystem>();
+            particle.Play();
+            canShoot = false;
+        }else if (GetComponentInChildren<BulletCreator>() != null)
+        {
+            BulletCreator bullet = GetComponentInChildren<BulletCreator>();
+            bullet.ShootFunc();
+            canShoot = false;
+        }
+    }
     public class Factory : PlaceholderFactory<TowerController>
     {
         

@@ -297,7 +297,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5366437772910190653}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243034353312063586, guid: c40bed98f23a748f89472abe9c1a6871, type: 2}
   m_audioClip: {fileID: 8300000, guid: ce02cc583b9d84102a12a156e90ca692, type: 3}
@@ -439,6 +439,7 @@ MonoBehaviour:
   towerData: {fileID: 11400000, guid: 004d9802cfb93cf45bb69af14a47b04c, type: 2}
   target: {fileID: 0}
   tower: {fileID: 0}
+  canShoot: 0
 --- !u!114 &6894431262831243223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +466,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -565,6 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729095853800763992}
+  - component: {fileID: 6365160580508030598}
   m_Layer: 0
   m_Name: ProjectilePoint
   m_TagString: Untagged
@@ -587,6 +589,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2614491417582119438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6365160580508030598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096380041992274435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b75209acdc444e3b3013d7095787137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerController: {fileID: 8998458731909191329}
+  prefabBullet: {fileID: 9046778824553141660, guid: cce6f7b7911b9534dbbbc6ff39c55ca4, type: 3}
 --- !u!1 &8405908103055205612
 GameObject:
   m_ObjectHideFlags: 0
