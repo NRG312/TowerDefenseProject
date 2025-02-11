@@ -784,7 +784,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 55.15893, y: 120.35683, z: 379.14975}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7218071581787460972}
@@ -826,7 +826,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8701979802944883401}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243247032315055076, guid: c40bed98f23a748f89472abe9c1a6871, type: 2}
   m_audioClip: {fileID: 8300000, guid: a41d49051e7ea4032a9ced28b70a1fe5, type: 3}
@@ -928,8 +928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gainMoney: 25
-  speed: 1.4
-  hpEnemy: 1.5
+  speed: 4.5
+  hpEnemy: 2
+  destroyedVehiclePrefab: {fileID: 5999929134828048393, guid: 76c28eb85de1f5e4c864e53829512802, type: 3}
 --- !u!65 &6376236765818181650
 BoxCollider:
   m_ObjectHideFlags: 0

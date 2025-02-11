@@ -7,15 +7,21 @@ using Zenject;
 public class TowerController : MonoBehaviour
 {
     public TowerDataSO towerData;
-    
     //Detecting Enemy
     [HideInInspector]public GameObject target;
     [HideInInspector]public GameObject tower;
     //timer
     private float _timeToShoot;
     [HideInInspector]public bool canShoot;
+    //
+    private AudioSource _audio;
     private void Start()
     {
+        //Finding Audio source
+        if (GetComponent<AudioSource>() != null)
+        {
+            _audio = GetComponent<AudioSource>();
+        }
         //assign variables
         _timeToShoot = towerData.timeToShoot;
         //Finding tower in children objects
@@ -74,13 +80,20 @@ public class TowerController : MonoBehaviour
         {
             ParticleSystem particle = GetComponentInChildren<ParticleSystem>();
             particle.Play();
+            PlaySound();
             canShoot = false;
-        }else if (GetComponentInChildren<BulletCreator>() != null)
+        }else if (GetComponentInChildren<RocketBulletCreator>() != null)
         {
-            BulletCreator bullet = GetComponentInChildren<BulletCreator>();
-            bullet.ShootFunc();
+            RocketBulletCreator rocketBullet = GetComponentInChildren<RocketBulletCreator>();
+            rocketBullet.ShootFunc();
+            PlaySound();
             canShoot = false;
         }
+    }
+
+    private void PlaySound()
+    {
+        _audio.Play();
     }
     public class Factory : PlaceholderFactory<TowerController>
     {

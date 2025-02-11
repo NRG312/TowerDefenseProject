@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour,IScoreBehaviour,IDamageable
 
     [FormerlySerializedAs("hp")] [Header("EnemyParameters")]
     public float hpEnemy;
+    [SerializeField] private GameObject destroyedVehiclePrefab;
     
     public void ResetEnemy()
     {
@@ -37,10 +38,15 @@ public class EnemyController : MonoBehaviour,IScoreBehaviour,IDamageable
     {
         _healthSystem.TakeDamage(dmg);
     }
-    //tutaj bedzie stworzenie zniszczony prefab
+    
+    private void SpawnDestroyedVehicle()
+    {
+        Instantiate(destroyedVehiclePrefab, transform.position, transform.rotation);
+    }
     public void EnemyDead()
     {
         ObjectsTickController.onDeathEnemy.Invoke(this);
+        SpawnDestroyedVehicle();
         gameObject.SetActive(false);
     }
     //Moving Enemy
